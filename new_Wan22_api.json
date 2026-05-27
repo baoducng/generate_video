@@ -231,7 +231,7 @@
   "279": {
     "inputs": {
       "lora_0": "high_noise_model.safetensors",
-      "strength_0": 1,
+      "strength_0": 0.7,
       "lora_1": "none",
       "strength_1": 1,
       "lora_2": "none",
@@ -452,7 +452,7 @@
   },
   "569": {
     "inputs": {
-      "value": 8
+      "value": 16
     },
     "class_type": "INTConstant",
     "_meta": {
@@ -465,8 +465,8 @@
         "569",
         0
       ],
-      "cfg_scale_start": 2,
-      "cfg_scale_end": 2,
+      "cfg_scale_start": 3.5,
+      "cfg_scale_end": 3.5,
       "interpolation": "linear",
       "start_percent": 0,
       "end_percent": 0.01
@@ -478,7 +478,7 @@
   },
   "575": {
     "inputs": {
-      "value": 4
+      "value": 8
     },
     "class_type": "INTConstant",
     "_meta": {

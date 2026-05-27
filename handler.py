@@ -185,7 +185,14 @@ def handler(job):
     workflow_file = "/new_Wan22_flf2v_api.json" if end_image_path_local else "/new_Wan22_api.json"
     logger.info(f"Using {'FLF2V' if end_image_path_local else 'single'} workflow with {lora_count} LoRA pairs")
     
-    prompt = load_workflow(workflow_file)
+    # Cho phép gửi nguyên workflow JSON theo từng request (để tinh chỉnh motion
+    # mà KHÔNG cần build lại image). Nếu request có "workflow" thì dùng nó làm
+    # base, không thì dùng file mặc định nướng trong image.
+    if job_input.get("workflow"):
+        prompt = job_input["workflow"]
+        logger.info("Using workflow supplied in request payload (input.workflow)")
+    else:
+        prompt = load_workflow(workflow_file)
     
     length = job_input.get("length", 81)
     steps = job_input.get("steps", 10)
