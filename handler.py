@@ -207,7 +207,13 @@ def handler(job):
     prompt["135"]["inputs"]["negative_prompt"] = job_input.get("negative_prompt", "bright tones, overexposed, static, blurred details, subtitles, style, works, paintings, images, static, overall gray, worst quality, low quality, JPEG compression residue, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, misshapen limbs, fused fingers, still picture, messy background, three legs, many people in the background, walking backwards")
     prompt["220"]["inputs"]["seed"] = job_input["seed"]
     prompt["540"]["inputs"]["seed"] = job_input["seed"]
-    prompt["540"]["inputs"]["cfg"] = job_input["cfg"]
+    # LOW sampler (detail/refinement phase) must stay at cfg=1.0 — that is
+    # what the Lightning LoRA on node 553 was distilled for. Forwarding
+    # job_input["cfg"] (web default 3.0) here triggers the distillation
+    # conflict that surfaces as blurry frames + drifted color/lighting.
+    # The baked workflow value is 1.0; leave it alone.
+    # HIGH sampler still consumes job_input["cfg"] via the schedule below,
+    # so user-controllable prompt adherence is preserved on the motion phase.
     prompt["570"]["inputs"]["cfg_scale_start"] = job_input["cfg"]
     prompt["570"]["inputs"]["cfg_scale_end"] = job_input["cfg"]
     # 해상도(폭/높이) 16배수 보정
