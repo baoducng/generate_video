@@ -10,10 +10,10 @@
       "input": {
         "prompt": "a cat sitting on a sunny windowsill, gentle breeze",
         "seed": 42,
-        "cfg": 1.0,
+        "cfg": 3.0,
         "width": 640,
         "height": 360,
-        "length": 17
+        "length": 49
       },
       "timeout": 600000
     }

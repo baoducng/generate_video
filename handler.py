@@ -199,6 +199,10 @@ def handler(job):
 
     prompt["244"]["inputs"]["image"] = image_path
     prompt["541"]["inputs"]["num_frames"] = length
+    # Motion knob: noise added to the input-image latent. 0 hard-anchors the
+    # video to the still image (= "camera barely moves"). 0.1 is the kijai
+    # reference default; bump to ~0.15 if motion still feels muted.
+    prompt["541"]["inputs"]["noise_aug_strength"] = job_input.get("noise_aug_strength", 0.1)
     prompt["135"]["inputs"]["positive_prompt"] = job_input["prompt"]
     prompt["135"]["inputs"]["negative_prompt"] = job_input.get("negative_prompt", "bright tones, overexposed, static, blurred details, subtitles, style, works, paintings, images, static, overall gray, worst quality, low quality, JPEG compression residue, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, misshapen limbs, fused fingers, still picture, messy background, three legs, many people in the background, walking backwards")
     prompt["220"]["inputs"]["seed"] = job_input["seed"]
@@ -221,7 +225,15 @@ def handler(job):
     prompt["498"]["inputs"]["context_frames"] = length
 
     # step 설정 적용
-    if "834" in prompt:
+    # new_Wan22_api.json / new_Wan22_flf2v_api.json drive total steps from
+    # INTConstant node 569 and the HIGH/LOW split from node 575. Keep the
+    # legacy 834/829 branch as a fallback in case an older workflow JSON is
+    # ever supplied via input.workflow.
+    if "569" in prompt:
+        prompt["569"]["inputs"]["value"] = steps
+        prompt["575"]["inputs"]["value"] = max(1, steps // 2)
+        logger.info(f"Steps set to: {steps} (HIGH/LOW split at {steps // 2})")
+    elif "834" in prompt:
         prompt["834"]["inputs"]["steps"] = steps
         logger.info(f"Steps set to: {steps}")
         lowsteps = int(steps*0.6)
