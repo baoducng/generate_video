@@ -1,0 +1,21 @@
+{
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "allowedCudaVersions": ["12.8"]
+  },
+  "tests": [
+    {
+      "name": "basic_i2v_generation",
+      "input": {
+        "prompt": "a cat sitting on a sunny windowsill, gentle breeze",
+        "seed": 42,
+        "cfg": 1.0,
+        "width": 640,
+        "height": 360,
+        "length": 17
+      },
+      "timeout": 600000
+    }
+  ]
+}
