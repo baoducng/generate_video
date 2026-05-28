@@ -64,7 +64,7 @@
     },
     "class_type": "VHS_VideoCombine",
     "_meta": {
-      "title": "Video Combine 🎥🅥🅗🅢"
+      "title": "Video Combine \ud83c\udfa5\ud83c\udd65\ud83c\udd57\ud83c\udd62"
     }
   },
   "135": {
@@ -129,7 +129,7 @@
     },
     "class_type": "CLIPVisionLoader",
     "_meta": {
-      "title": "CLIP_VISION 로드"
+      "title": "CLIP_VISION \ub85c\ub4dc"
     }
   },
   "193": {
@@ -225,7 +225,7 @@
     },
     "class_type": "LoadImage",
     "_meta": {
-      "title": "이미지 로드"
+      "title": "\uc774\ubbf8\uc9c0 \ub85c\ub4dc"
     }
   },
   "279": {
@@ -469,7 +469,7 @@
       "cfg_scale_end": 3.5,
       "interpolation": "linear",
       "start_percent": 0,
-      "end_percent": 0.01
+      "end_percent": 1.0
     },
     "class_type": "CreateCFGScheduleFloatList",
     "_meta": {

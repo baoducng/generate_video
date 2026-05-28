@@ -204,6 +204,8 @@ def handler(job):
     prompt["220"]["inputs"]["seed"] = job_input["seed"]
     prompt["540"]["inputs"]["seed"] = job_input["seed"]
     prompt["540"]["inputs"]["cfg"] = job_input["cfg"]
+    prompt["570"]["inputs"]["cfg_scale_start"] = job_input["cfg"]
+    prompt["570"]["inputs"]["cfg_scale_end"] = job_input["cfg"]
     # 해상도(폭/높이) 16배수 보정
     original_width = job_input["width"]
     original_height = job_input["height"]
